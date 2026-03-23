@@ -1,0 +1,446 @@
+[
+  {
+    "text": "這個",
+    "start": 1.16,
+    "end": 1.72,
+    "keep": true
+  },
+  {
+    "text": "愛",
+    "start": 1.72,
+    "end": 1.96,
+    "keep": true
+  },
+  {
+    "text": "滋",
+    "start": 1.96,
+    "end": 2.06,
+    "keep": true
+  },
+  {
+    "text": "材",
+    "start": 2.06,
+    "end": 2.12,
+    "keep": true
+  },
+  {
+    "text": "這邊",
+    "start": 2.12,
+    "end": 2.44,
+    "keep": false
+  },
+  {
+    "text": "可",
+    "start": 2.44,
+    "end": 2.72,
+    "keep": true
+  },
+  {
+    "text": "不",
+    "start": 2.72,
+    "end": 2.82,
+    "keep": true
+  },
+  {
+    "text": "可以",
+    "start": 2.82,
+    "end": 2.94,
+    "keep": true
+  },
+  {
+    "text": "為",
+    "start": 2.94,
+    "end": 3.06,
+    "keep": true
+  },
+  {
+    "text": "觀眾",
+    "start": 3.06,
+    "end": 3.36,
+    "keep": true
+  },
+  {
+    "text": "介",
+    "start": 3.36,
+    "end": 3.64,
+    "keep": true
+  },
+  {
+    "text": "紹",
+    "start": 3.64,
+    "end": 4.0,
+    "keep": true
+  },
+  {
+    "text": "這邊",
+    "start": 4.0,
+    "end": 4.3,
+    "keep": true
+  },
+  {
+    "text": "比較",
+    "start": 4.3,
+    "end": 4.5,
+    "keep": true
+  },
+  {
+    "text": "有",
+    "start": 4.5,
+    "end": 4.72,
+    "keep": true
+  },
+  {
+    "text": "特",
+    "start": 4.72,
+    "end": 4.88,
+    "keep": true
+  },
+  {
+    "text": "色",
+    "start": 4.88,
+    "end": 4.98,
+    "keep": true
+  },
+  {
+    "text": "的",
+    "start": 4.98,
+    "end": 5.22,
+    "keep": true
+  },
+  {
+    "text": "一些",
+    "start": 5.22,
+    "end": 5.34,
+    "keep": true
+  },
+  {
+    "text": "課",
+    "start": 5.34,
+    "end": 5.52,
+    "keep": true
+  },
+  {
+    "text": "程",
+    "start": 5.52,
+    "end": 6.26,
+    "keep": true
+  },
+  {
+    "text": "好",
+    "start": 6.26,
+    "end": 7.3,
+    "keep": true
+  },
+  {
+    "text": "在",
+    "start": 8.28,
+    "end": 8.84,
+    "keep": true
+  },
+  {
+    "text": "我們",
+    "start": 8.84,
+    "end": 9.12,
+    "keep": true
+  },
+  {
+    "text": "愛",
+    "start": 9.12,
+    "end": 9.3,
+    "keep": true
+  },
+  {
+    "text": "滋",
+    "start": 9.3,
+    "end": 9.56,
+    "keep": true
+  },
+  {
+    "text": "材",
+    "start": 9.56,
+    "end": 9.88,
+    "keep": true
+  },
+  {
+    "text": "最",
+    "start": 9.88,
+    "end": 10.2,
+    "keep": true
+  },
+  {
+    "text": "受",
+    "start": 10.2,
+    "end": 10.38,
+    "keep": true
+  },
+  {
+    "text": "歡迎",
+    "start": 10.38,
+    "end": 10.66,
+    "keep": true
+  },
+  {
+    "text": "的",
+    "start": 10.66,
+    "end": 10.88,
+    "keep": true
+  },
+  {
+    "text": "有",
+    "start": 10.88,
+    "end": 11.0,
+    "keep": true
+  },
+  {
+    "text": "三",
+    "start": 11.0,
+    "end": 11.3,
+    "keep": true
+  },
+  {
+    "text": "項",
+    "start": 11.3,
+    "end": 11.52,
+    "keep": true
+  },
+  {
+    "text": "課",
+    "start": 11.52,
+    "end": 11.84,
+    "keep": true
+  },
+  {
+    "text": "程",
+    "start": 11.84,
+    "end": 12.4,
+    "keep": true
+  },
+  {
+    "text": "第一個",
+    "start": 12.4,
+    "end": 12.88,
+    "keep": false
+  },
+  {
+    "text": "是",
+    "start": 12.88,
+    "end": 13.18,
+    "keep": false
+  },
+  {
+    "text": "瑞",
+    "start": 13.18,
+    "end": 13.42,
+    "keep": false
+  },
+  {
+    "text": "士",
+    "start": 13.42,
+    "end": 13.6,
+    "keep": false
+  },
+  {
+    "text": "的",
+    "start": 13.6,
+    "end": 14.0,
+    "keep": false
+  },
+  {
+    "text": "第一個",
+    "start": 14.94,
+    "end": 15.3,
+    "keep": false
+  },
+  {
+    "text": "是",
+    "start": 15.3,
+    "end": 15.58,
+    "keep": false
+  },
+  {
+    "text": "瑞",
+    "start": 15.58,
+    "end": 15.8,
+    "keep": false
+  },
+  {
+    "text": "士",
+    "start": 15.8,
+    "end": 16.02,
+    "keep": false
+  },
+  {
+    "text": "的",
+    "start": 16.02,
+    "end": 16.3,
+    "keep": false
+  },
+  {
+    "text": "第一個",
+    "start": 17.36,
+    "end": 17.74,
+    "keep": false
+  },
+  {
+    "text": "是",
+    "start": 17.74,
+    "end": 18.06,
+    "keep": false
+  },
+  {
+    "text": "瑞",
+    "start": 18.06,
+    "end": 18.26,
+    "keep": false
+  },
+  {
+    "text": "士",
+    "start": 18.26,
+    "end": 18.48,
+    "keep": false
+  },
+  {
+    "text": "的",
+    "start": 18.48,
+    "end": 18.66,
+    "keep": false
+  },
+  {
+    "text": "E",
+    "start": 18.66,
+    "end": 18.9,
+    "keep": false
+  },
+  {
+    "text": "cho",
+    "start": 18.9,
+    "end": 19.06,
+    "keep": false
+  },
+  {
+    "text": "Mari",
+    "start": 19.06,
+    "end": 19.42,
+    "keep": false
+  },
+  {
+    "text": "課",
+    "start": 19.42,
+    "end": 19.78,
+    "keep": false
+  },
+  {
+    "text": "程",
+    "start": 19.78,
+    "end": 20.68,
+    "keep": false
+  },
+  {
+    "text": "第一個",
+    "start": 20.68,
+    "end": 21.3,
+    "keep": true
+  },
+  {
+    "text": "是",
+    "start": 21.3,
+    "end": 21.64,
+    "keep": true
+  },
+  {
+    "text": "瑞",
+    "start": 21.64,
+    "end": 21.9,
+    "keep": true
+  },
+  {
+    "text": "士",
+    "start": 21.9,
+    "end": 22.08,
+    "keep": true
+  },
+  {
+    "text": "的",
+    "start": 22.08,
+    "end": 22.3,
+    "keep": true
+  },
+  {
+    "text": "E",
+    "start": 22.3,
+    "end": 22.48,
+    "keep": true
+  },
+  {
+    "text": "cho",
+    "start": 22.48,
+    "end": 22.58,
+    "keep": true
+  },
+  {
+    "text": "Mari",
+    "start": 22.58,
+    "end": 23.04,
+    "keep": true
+  },
+  {
+    "text": "靜",
+    "start": 23.04,
+    "end": 23.44,
+    "keep": true
+  },
+  {
+    "text": "擺",
+    "start": 23.44,
+    "end": 23.58,
+    "keep": true
+  },
+  {
+    "text": "課",
+    "start": 23.58,
+    "end": 24.02,
+    "keep": true
+  },
+  {
+    "text": "程",
+    "start": 24.02,
+    "end": 25.0,
+    "keep": true
+  },
+  {
+    "text": "第一個",
+    "start": 25.19,
+    "end": 25.69,
+    "keep": false
+  },
+  {
+    "text": "是",
+    "start": 25.69,
+    "end": 25.95,
+    "keep": false
+  },
+  {
+    "text": "瑞",
+    "start": 25.95,
+    "end": 26.23,
+    "keep": false
+  },
+  {
+    "text": "士",
+    "start": 26.23,
+    "end": 26.45,
+    "keep": false
+  },
+  {
+    "text": "的",
+    "start": 26.45,
+    "end": 26.83,
+    "keep": false
+  },
+  {
+    "text": "第一個",
+    "start": 27.37,
+    "end": 27.75,
+    "keep": false
+  }
+]
