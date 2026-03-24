@@ -260,14 +260,17 @@ def detect_stutters(words: list[dict]) -> tuple[list[dict], list[dict], list[boo
 
 GEMINI_PROMPT = """你是一位專業的影片剪輯師。以下是一段影片的逐字稿 JSON，每個詞都有時間戳。
 
-請分析這份逐字稿，找出所有「結巴、重複說的、說到一半重來」的部分。
+請分析這份逐字稿，找出所有應該剪掉的部分：
 
-規則：
-1. 如果同一句話被說了多次，只保留最完整、最流暢的那一次，其他標記為移除
-2. 單純的語助詞（嗯、啊、那個）如果不影響語意，可以保留
-3. 如果講者說到一半停下來重說，移除不完整的部分，保留完整的
-4. 不要移除有意義的、非重複的內容
+1. 結巴與重複：同一句話說了多次 → 只保留最完整流暢的那一次
+2. 說到一半重來：移除不完整的部分，保留完整的
+3. 口頭禪贅字：「這個」「那個」當口頭禪、沒有指示意義時 → 移除
+   例如「他的這個教學質量」→「這個」是贅字，移除；「這個問題很重要」→ 有指示意義，保留
+4. 語氣填充：「就是說」「就是」「怎麼說呢」「嗯」「啊」「呃」「對」等不影響語意的 → 移除
+5. 重複的連接詞或轉折詞 → 移除多餘的
 
+判斷原則：移除後前後文依然通順就該移除。不要移除有實質語意、推進內容的詞。
+{extra_rules}
 請回傳一個 JSON 陣列，格式為：
 [0, 3, 4, 5, 12, 13]
 
@@ -281,12 +284,12 @@ CHUNK_SIZE = 800
 CHUNK_OVERLAP = 50
 
 
-def _call_gemini(client, chunk: list[dict]) -> set[int]:
+def _call_gemini(client, chunk: list[dict], extra_rules: str = "") -> set[int]:
     """Send one chunk to Gemini API, return set of word indices to remove."""
     transcript = json.dumps(chunk, ensure_ascii=False)
     response = client.models.generate_content(
         model="gemini-2.5-flash",
-        contents=GEMINI_PROMPT.format(transcript=transcript),
+        contents=GEMINI_PROMPT.format(transcript=transcript, extra_rules=extra_rules),
     )
     text = response.text.strip()
     if "```" in text:
@@ -294,10 +297,16 @@ def _call_gemini(client, chunk: list[dict]) -> set[int]:
     return set(json.loads(text))
 
 
-def gemini_detect_stutters(words: list[dict], api_key: str) -> tuple[list[dict], list[dict], list[bool]]:
+def gemini_detect_stutters(words: list[dict], api_key: str,
+                           remove_words: list[str] | None = None) -> tuple[list[dict], list[dict], list[bool]]:
     from google import genai
 
     client = genai.Client(api_key=api_key)
+
+    extra_rules = ""
+    if remove_words:
+        joined = "、".join(f"「{w}」" for w in remove_words)
+        extra_rules = f"\n特別注意：以下詞彙無論在什麼語境都必須移除：{joined}\n"
 
     entries = [
         {"i": i, "text": w["text"], "start": w["start"], "end": w["end"]}
@@ -320,7 +329,7 @@ def gemini_detect_stutters(words: list[dict], api_key: str) -> tuple[list[dict],
 
     total_chunks = len(chunks)
     if total_chunks == 1:
-        print("[3/4] 請 Gemini AI 分析結巴與重複的地方...")
+        print("[3/4] 請 Gemini AI 分析結巴、贅字、口頭禪...")
     else:
         print(f"[3/4] 逐字稿較長（{n} 個詞），分 {total_chunks} 批送 Gemini 分析...")
 
@@ -328,8 +337,24 @@ def gemini_detect_stutters(words: list[dict], api_key: str) -> tuple[list[dict],
     for ci, chunk in enumerate(chunks):
         if total_chunks > 1:
             print(f"   分析第 {ci + 1}/{total_chunks} 批（詞 {chunk[0]['i']}～{chunk[-1]['i']}）...")
-        result = _call_gemini(client, chunk)
+        result = _call_gemini(client, chunk, extra_rules)
         remove_indices.update(result)
+
+    # Post-processing: force-remove words matching the list (Gemini safety net)
+    # Supports multi-word concatenation: e.g. "民辦教師" matches "民"+"辦"+"教"+"師"
+    if remove_words:
+        for rw in remove_words:
+            rw_len = len(rw)
+            for i in range(n):
+                concat = ""
+                for j in range(i, n):
+                    concat += words[j]["text"]
+                    if len(concat) > rw_len:
+                        break
+                    if concat == rw:
+                        for k in range(i, j + 1):
+                            remove_indices.add(k)
+                        break
 
     keep = [i not in remove_indices for i in range(n)]
     kept = [w for i, w in enumerate(words) if keep[i]]
@@ -467,9 +492,10 @@ def main():
     else:
         words = transcribe(input_path, args.model)
         api_key = config.get("gemini_api_key", "")
+        remove_words = config.get("remove_words", [])
         if api_key:
             try:
-                kept_words, all_words, keep_flags = gemini_detect_stutters(words, api_key)
+                kept_words, all_words, keep_flags = gemini_detect_stutters(words, api_key, remove_words)
             except Exception as e:
                 print(f"   Gemini 無法使用，改用本機分析（原因：{_friendly_error(e)}）")
                 kept_words, all_words, keep_flags = detect_stutters(words)
