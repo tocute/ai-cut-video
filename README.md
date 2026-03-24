@@ -67,7 +67,7 @@
 └──────────────┘
 ```
 
-> 如果使用 `--transcript`，Step 2 完成後會額外輸出逐字稿 JSON，可手動修改 `keep` 欄位後用 `--from-transcript` 重新從 Step 3 開始剪輯（跳過語音辨識和分析）。
+> 每次執行後都會自動輸出逐字稿 JSON，可手動修改 `keep` 欄位後用 `--from-transcript` 重新從 Step 3 開始剪輯（跳過語音辨識和分析）。
 
 ---
 
@@ -124,7 +124,6 @@ pip install faster-whisper google-genai
 ```json
 {
   "gemini_api_key": "你的 Gemini API Key",
-  "zoom": 1.0,
   "remove_words": ["不想出現的詞A", "不想出現的詞B"]
 }
 ```
@@ -132,7 +131,6 @@ pip install faster-whisper google-genai
 | 設定 | 說明 |
 |------|------|
 | `gemini_api_key` | Google Gemini 的 API Key。有填就會自動使用 Gemini 來分析（更精準）；留空或不填就用本機規則分析 |
-| `zoom` | 剪接處的畫面縮放比例。設成 `1.0` 關閉縮放；設成 `1.07` 會交替放大 107% 模擬雙機位效果 |
 | `remove_words` | 要強制移除的詞彙清單。支援多詞拼接：例如語音辨識把「民辦教師」拆成「民」「辦」「教」「師」四個詞，只要拼起來匹配就會整組移除 |
 
 ### remove_words 用法
@@ -186,11 +184,7 @@ python cut_video.py input.mp4
 # 自己指定輸出的檔名
 python cut_video.py input.mp4 -o output.mp4
 
-# 想要更精準的辨識（會比較慢）
-python cut_video.py input.mp4 --model large-v3
-
-# 順便產出逐字稿（用來手動微調，見下方說明）
-python cut_video.py input.mp4 --transcript
+# 每次執行都會自動產出逐字稿 JSON（可用於手動微調，見下方說明）
 ```
 
 > **提示：** 把 `input.mp4` 換成你自己的影片檔名就好。如果影片不在同一個資料夾，要用完整路徑，例如 `C:\Users\你的名字\Desktop\影片.mp4`。
@@ -201,13 +195,13 @@ python cut_video.py input.mp4 --transcript
 
 自動偵測不一定 100% 完美。如果你想自己決定哪些地方要剪、哪些要保留，可以這樣做：
 
-**第一步：產出逐字稿**
+**第一步：正常執行一次**
 
 ```bash
-python cut_video.py input.mp4 --transcript
+python cut_video.py input.mp4
 ```
 
-這會產出一個 `.json` 檔案（例如 `input_clean.json`）。
+執行後會自動產出一個 `.json` 檔案（例如 `input_clean.json`）。
 
 **第二步：用文字編輯器打開 JSON 檔，手動修改**
 
@@ -244,23 +238,9 @@ python cut_video.py input.mp4 --from-transcript input_clean.json
 |------|--------|------|
 | `input` | （必填） | 你的影片檔案路徑 |
 | `-o`, `--output` | 自動產生 `_clean` 檔名 | 指定輸出的檔名 |
-| `--model` | `medium` | 語音辨識模型大小（見下方說明） |
-| `--transcript` | 關閉 | 產出逐字稿 JSON，可用於手動微調 |
-| `--from-transcript` | — | 讀取修改過的逐字稿 JSON 來剪輯 |
+| `--from-transcript` | — | 讀取修改過的逐字稿 JSON 來剪輯（跳過語音辨識） |
 
-## 模型選擇
-
-模型越大越精準，但速度越慢，首次使用會自動下載。
-
-| 模型 | 速度 | 準確度 | 首次下載大小 |
-|------|------|--------|-------------|
-| `tiny` | 最快 | 低 | ~75 MB |
-| `base` | 快 | 中低 | ~150 MB |
-| `small` | 中等 | 中等 | ~500 MB |
-| `medium` | 較慢 | 高 | ~1.5 GB |
-| `large-v3` | 最慢 | 最高 | ~3 GB |
-
-**建議：** 先用預設的 `medium`，如果覺得辨識不夠準確再換 `large-v3`。
+語音辨識使用 `medium` 模型（首次執行會自動下載約 1.5 GB）。
 
 ---
 
@@ -283,4 +263,4 @@ python cut_video.py input.mp4 --from-transcript input_clean.json
 
 **Q: remove_words 沒有生效？**
 
-Whisper 辨識出來的文字可能跟你預期的不同（例如「民」變成「名」）。建議先用 `--transcript` 看看實際辨識出來的文字，再把對應的寫法加到 `remove_words` 裡。
+Whisper 辨識出來的文字可能跟你預期的不同（例如「民」變成「名」）。建議查看自動產出的逐字稿 JSON，看看實際辨識出來的文字，再把對應的寫法加到 `remove_words` 裡。

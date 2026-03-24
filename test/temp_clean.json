@@ -3,7 +3,7 @@
     "text": "這個",
     "start": 1.16,
     "end": 1.72,
-    "keep": true
+    "keep": false
   },
   {
     "text": "愛",
@@ -27,7 +27,7 @@
     "text": "這邊",
     "start": 2.12,
     "end": 2.44,
-    "keep": false
+    "keep": true
   },
   {
     "text": "可",
@@ -129,7 +129,7 @@
     "text": "好",
     "start": 6.26,
     "end": 7.3,
-    "keep": true
+    "keep": false
   },
   {
     "text": "在",
