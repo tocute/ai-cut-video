@@ -1,4 +1,4 @@
-# cut-video
+# ai-cut-video
 
 自動偵測並剪掉影片中「結巴、重複說話、贅字口頭禪」的片段，讓你的影片更流暢。
 
@@ -82,7 +82,7 @@
 brew install ffmpeg
 
 # 第二步：進入專案資料夾，建立環境
-cd cut-video
+cd ai-cut-video
 python3 -m venv venv
 source venv/bin/activate
 pip install faster-whisper google-genai
@@ -109,7 +109,7 @@ pip install faster-whisper google-genai
 打開「命令提示字元」，依序輸入：
 
 ```cmd
-cd cut-video
+cd ai-cut-video
 python -m venv venv
 venv\Scripts\activate
 pip install faster-whisper google-genai
@@ -165,13 +165,13 @@ Whisper 語音辨識有時候會把一個詞拆成多個字，例如：
 
 **macOS：**
 ```bash
-cd cut-video
+cd ai-cut-video
 source venv/bin/activate
 ```
 
 **Windows：**
 ```cmd
-cd cut-video
+cd ai-cut-video
 venv\Scripts\activate
 ```
 
